@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #222;
+}
+
+header {
+  background-color: #1f3c88;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 10px;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+.search-section,
+.details-card,
+.book-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.search-section {
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.search-bar input {
+  flex: 1;
+  min-width: 240px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.search-bar button {
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #1f3c88;
+  color: white;
+  border-radius: 6px;
+}
+
+.search-bar button:hover {
+  background-color: #16306d;
+}
+
+.controls {
+  margin-top: 15px;
+}
+
+.controls select {
+  padding: 8px;
+  margin-left: 8px;
+}
+
+#message,
+#bookshelfMessage {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.book-card {
+  padding: 15px;
+  text-align: center;
+}
+
+.book-card img {
+  width: 128px;
+  height: 190px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.book-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.book-card a {
+  color: #1f3c88;
+  text-decoration: none;
+}
+
+.book-card a:hover {
+  text-decoration: underline;
+}
+
+.book-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.details-card {
+  padding: 25px;
+}
+
+.details-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.details-images {
+  flex: 1;
+  min-width: 220px;
+  text-align: center;
+}
+
+.details-images img {
+  max-width: 220px;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.details-info {
+  flex: 2;
+  min-width: 280px;
+}
+
+.details-info h2 {
+  margin-top: 0;
+}
+
+.details-info p {
+  line-height: 1.6;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #1f3c88;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
