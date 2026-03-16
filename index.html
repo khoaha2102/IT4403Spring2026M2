@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Search | Milestone 2</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Google Books Explorer</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="bookshelf.html">My Bookshelf</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="search-section">
+      <h2>Book Search</h2>
+      <p>Search for books using keywords.</p>
+
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Enter a title, author, or keyword" />
+        <button id="searchBtn">Search</button>
+      </div>
+
+      <div class="controls">
+        <label for="pageSelect">Page:</label>
+        <select id="pageSelect"></select>
+      </div>
+    </section>
+
+    <section>
+      <div id="message"></div>
+      <div id="results" class="book-grid"></div>
+    </section>
+  </main>
+
+  <script src="js/search.js"></script>
+</body>
+</html>
