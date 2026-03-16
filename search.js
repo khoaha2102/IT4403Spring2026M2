@@ -46,15 +46,22 @@ function searchBooks(query) {
       $.getJSON(url2)
         .done(function (data2) {
           const items2 = data2.items || [];
+          console.log("First request:", items1.length);
+          console.log("Second request:", items2.length);
+
           allBooks = [...items1, ...items2].slice(0, 60);
           finishSearchResults();
         })
-        .fail(function () {
-          allBooks = items1.slice(0, 60);
+        .fail(function (xhr, status, error) {
+          console.log("Second request failed:", status, error);
+          console.log("Second URL:", url2);
+
+          allBooks = items1;
           finishSearchResults();
         });
     })
-    .fail(function () {
+    .fail(function (xhr, status, error) {
+      console.log("First request failed:", status, error);
       $("#message").text("There was an error retrieving book data.");
     });
 }
