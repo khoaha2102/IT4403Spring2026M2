@@ -35,25 +35,41 @@ function searchBooks(query) {
   $("#pageSelect").hide();
 
   const encodedQuery = encodeURIComponent(query);
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&maxResults=40`;
 
-  $.getJSON(url)
-    .done(function (data) {
-      allBooks = data.items || [];
+  const url1 = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&startIndex=0&maxResults=40`;
+  const url2 = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&startIndex=40&maxResults=20`;
 
-      if (allBooks.length === 0) {
-        $("#message").text("No books found.");
-        return;
-      }
+  $.getJSON(url1)
+    .done(function (data1) {
+      const items1 = data1.items || [];
 
-      $("#message").text(`Showing ${allBooks.length} result(s).`);
-      setupPagination();
-      displayPage(1);
+      $.getJSON(url2)
+        .done(function (data2) {
+          const items2 = data2.items || [];
+          allBooks = [...items1, ...items2].slice(0, 60);
+          finishSearchResults();
+        })
+        .fail(function () {
+          allBooks = items1.slice(0, 60);
+          finishSearchResults();
+        });
     })
-    .fail(function (xhr) {
-      console.log("Search API error:", xhr);
+    .fail(function () {
       $("#message").text("There was an error retrieving book data.");
     });
+}
+
+function finishSearchResults() {
+  if (allBooks.length === 0) {
+    $("#message").text("No books found.");
+    $("#results").html("");
+    $("#pageSelect").hide();
+    return;
+  }
+
+  $("#message").text(`Showing ${allBooks.length} result(s).`);
+  setupPagination();
+  displayPage(1);
 }
 
 function setupPagination() {
