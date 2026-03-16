@@ -46,22 +46,15 @@ function searchBooks(query) {
       $.getJSON(url2)
         .done(function (data2) {
           const items2 = data2.items || [];
-          console.log("First request:", items1.length);
-          console.log("Second request:", items2.length);
-
           allBooks = [...items1, ...items2].slice(0, 60);
           finishSearchResults();
         })
-        .fail(function (xhr, status, error) {
-          console.log("Second request failed:", status, error);
-          console.log("Second URL:", url2);
-
-          allBooks = items1;
+        .fail(function () {
+          allBooks = items1.slice(0, 60);
           finishSearchResults();
         });
     })
-    .fail(function (xhr, status, error) {
-      console.log("First request failed:", status, error);
+    .fail(function () {
       $("#message").text("There was an error retrieving book data.");
     });
 }
@@ -107,9 +100,11 @@ function displayPage(page) {
     const volumeInfo = book.volumeInfo || {};
     const title = volumeInfo.title || "No title available";
     const authors = volumeInfo.authors ? volumeInfo.authors.join(", ") : "Unknown author";
-    const image = volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail
-      ? volumeInfo.imageLinks.thumbnail
-      : "https://via.placeholder.com/128x190?text=No+Cover";
+
+    let image = "https://via.placeholder.com/128x190?text=No+Cover";
+    if (volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+      image = volumeInfo.imageLinks.thumbnail.replace("http://", "https://");
+    }
 
     const card = `
       <div class="book-card">
