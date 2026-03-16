@@ -17,6 +17,12 @@ $(document).ready(function () {
     searchBooks(query);
   });
 
+  $("#searchInput").on("keypress", function (e) {
+    if (e.which === 13) {
+      $("#searchBtn").click();
+    }
+  });
+
   $("#pageSelect").on("change", function () {
     const page = parseInt($(this).val());
     displayPage(page);
@@ -29,16 +35,11 @@ function searchBooks(query) {
   $("#pageSelect").hide();
 
   const encodedQuery = encodeURIComponent(query);
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&maxResults=40`;
 
-  const request1 = $.getJSON(`https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&startIndex=0&maxResults=40`);
-  const request2 = $.getJSON(`https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&startIndex=40&maxResults=20`);
-
-  $.when(request1, request2)
-    .done(function (response1, response2) {
-      const items1 = response1[0].items || [];
-      const items2 = response2[0].items || [];
-
-      allBooks = [...items1, ...items2].slice(0, 60);
+  $.getJSON(url)
+    .done(function (data) {
+      allBooks = data.items || [];
 
       if (allBooks.length === 0) {
         $("#message").text("No books found.");
@@ -49,7 +50,8 @@ function searchBooks(query) {
       setupPagination();
       displayPage(1);
     })
-    .fail(function () {
+    .fail(function (xhr) {
+      console.log("Search API error:", xhr);
       $("#message").text("There was an error retrieving book data.");
     });
 }
@@ -64,8 +66,10 @@ function setupPagination() {
     $pageSelect.append(`<option value="${i}">Page ${i}</option>`);
   }
 
-  if (totalPages > 0) {
+  if (totalPages > 1) {
     $pageSelect.show();
+  } else {
+    $pageSelect.hide();
   }
 }
 
