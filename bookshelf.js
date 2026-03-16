@@ -7,7 +7,13 @@ function loadBookshelf() {
 
   // Replace these sample IDs with your own Google Books public bookshelf volume IDs
   const myBookIds = [
-    "ZGmzqnnu904C"
+    "ZGmzqnnu904C",
+  "mwrf1EMOcskC",
+  "YwEQoMAJjj8C",
+  "s-fJvVOZu0QC",
+  "Mc5hDwAAQBAJ",
+  "LpctBAAAQBAJ",
+  "ym8nKP7JdHwC"
   ];
 
   const requests = myBookIds.map(function (id) {
