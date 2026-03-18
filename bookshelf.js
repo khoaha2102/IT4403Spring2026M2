@@ -5,7 +5,6 @@ $(document).ready(function () {
 function loadBookshelf() {
   $("#bookshelfMessage").text("Loading bookshelf books...");
 
-  // Replace these sample IDs with your own Google Books public bookshelf volume IDs
   const myBookIds = [
     "ZGmzqnnu904C",
   "mwrf1EMOcskC",
