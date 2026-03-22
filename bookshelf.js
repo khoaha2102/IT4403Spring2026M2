@@ -1,3 +1,5 @@
+const API_KEY = "AIzaSyB2gMpdf1dDa2hKR3j9Zoe5vgJGSrPw7rU";
+
 $(document).ready(function () {
   loadBookshelf();
 });
@@ -7,16 +9,16 @@ function loadBookshelf() {
 
   const myBookIds = [
     "ZGmzqnnu904C",
-  "mwrf1EMOcskC",
-  "YwEQoMAJjj8C",
-  "s-fJvVOZu0QC",
-  "Mc5hDwAAQBAJ",
-  "LpctBAAAQBAJ",
-  "ym8nKP7JdHwC"
+    "mwrf1EMOcskC",
+    "YwEQoMAJjj8C",
+    "s-fJvVOZu0QC",
+    "Mc5hDwAAQBAJ",
+    "LpctBAAAQBAJ",
+    "ym8nKP7JdHwC"
   ];
 
   const requests = myBookIds.map(function (id) {
-    return $.getJSON(`https://www.googleapis.com/books/v1/volumes/${id}`);
+    return $.getJSON(`https://www.googleapis.com/books/v1/volumes/${id}?key=${API_KEY}`);
   });
 
   $.when.apply($, requests)
@@ -37,9 +39,11 @@ function loadBookshelf() {
 
         const title = volumeInfo.title || "No title available";
         const authors = volumeInfo.authors ? volumeInfo.authors.join(", ") : "Unknown author";
-        const image = volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail
-          ? volumeInfo.imageLinks.thumbnail
-          : "https://via.placeholder.com/128x190?text=No+Cover";
+
+        let image = "https://via.placeholder.com/128x190?text=No+Cover";
+        if (volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+          image = volumeInfo.imageLinks.thumbnail.replace("http://", "https://");
+        }
 
         const card = `
           <div class="book-card">
