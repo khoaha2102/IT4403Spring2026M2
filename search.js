@@ -1,7 +1,7 @@
 let allBooks = [];
 const resultsPerPage = 10;
 
-const API_KEY = "YOUR_API_KEY_HERE";
+const API_KEY = "AIzaSyB2gMpdf1dDa2hKR3j9Zoe5vgJGSrPw7rU";
 
 $(document).ready(function () {
   $("#pageSelect").hide();
