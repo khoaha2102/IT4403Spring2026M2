@@ -1,6 +1,8 @@
 let allBooks = [];
 const resultsPerPage = 10;
 
+const API_KEY = "YOUR_API_KEY_HERE";
+
 $(document).ready(function () {
   $("#pageSelect").hide();
 
@@ -36,8 +38,8 @@ function searchBooks(query) {
 
   const encodedQuery = encodeURIComponent(query);
 
-  const url1 = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&startIndex=0&maxResults=40`;
-  const url2 = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&startIndex=40&maxResults=20`;
+  const url1 = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&printType=books&startIndex=0&maxResults=40&key=${API_KEY}`;
+  const url2 = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&printType=books&startIndex=40&maxResults=20&key=${API_KEY}`;
 
   $.getJSON(url1)
     .done(function (data1) {
