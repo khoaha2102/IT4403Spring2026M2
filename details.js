@@ -1,3 +1,5 @@
+const API_KEY = "AIzaSyB2gMpdf1dDa2hKR3j9Zoe5vgJGSrPw7rU";
+
 $(document).ready(function () {
   const params = new URLSearchParams(window.location.search);
   const bookId = params.get("id");
@@ -11,7 +13,7 @@ $(document).ready(function () {
 });
 
 function loadBookDetails(bookId) {
-  const url = `https://www.googleapis.com/books/v1/volumes/${bookId}`;
+  const url = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${API_KEY}`;
 
   $.getJSON(url)
     .done(function (book) {
